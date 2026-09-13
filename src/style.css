@@ -11,6 +11,11 @@ html, body, #app {
   height: 100%;
 }
 
+/* 🔥 ESCALA GLOBAL CORRECTA */
+html {
+  font-size: 15px; /* base real */
+}
+
 /* BODY */
 body {
   background: #050507;
@@ -18,19 +23,53 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
-/* CONTENEDOR GLOBAL */
-.container-global {
-  max-width: 1300px;
-  margin: 0 auto;
-  padding: 0 40px;
-}
-html {
-  font-size: 19px; /* 🔥 antes era 16px */
-}
-body {
-  font-family: 'Inter', sans-serif;
-}
-
+/* TIPOGRAFÍA */
 h1, h2 {
   font-family: 'Poppins', sans-serif;
+}
+
+/* CONTENEDOR GLOBAL */
+.container-global {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* 🔥 TABLET / LAPTOP GRANDE */
+@media (min-width: 1200px) {
+  html {
+    font-size: 17px;
+  }
+}
+
+/* 🔥 MÓVIL */
+@media (max-width: 768px) {
+
+  /* CONTENEDOR */
+  .container-global {
+    padding: 0 16px;
+  }
+
+  /* ESCALA GENERAL */
+  html {
+    font-size: 15px;
+  }
+
+  /* NAVBAR FIX */
+  body {
+    padding-top: 70px;
+  }
+
+  /* CENTRAR SECCIONES */
+  section {
+    text-align: center;
+  }
+
+  /* EVITAR FONDO RARO */
+  html, body {
+    background: #050507;
+    min-height: 100vh;
+  }
+
 }

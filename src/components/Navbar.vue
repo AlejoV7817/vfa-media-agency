@@ -1,18 +1,47 @@
 <script setup>
-import { ref } from 'vue'
+
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 const open = ref(false)
 
-// 🔥 ahora emite DOS eventos
 const emit = defineEmits(['open-contact', 'open-privacy'])
 
 const openContact = () => {
+  open.value = false
   emit('open-contact')
 }
 
 const openPrivacy = () => {
+  open.value = false
   emit('open-privacy')
 }
+
+/* 🔥 CLICK FUERA DEL MENÚ */
+const handleClickOutside = (e) => {
+  const menu = document.querySelector('.menu')
+  const hamb = document.querySelector('.hamb')
+
+  if (
+    open.value &&
+    menu &&
+    !menu.contains(e.target) &&
+    hamb &&
+    !hamb.contains(e.target)
+  ) {
+    open.value = false
+  }
+}
+
+/* 🔥 ACTIVAR LISTENER */
+onMounted(() => {
+  document.addEventListener('click', handleClickOutside)
+})
+
+/* 🔥 LIMPIAR */
+onBeforeUnmount(() => {
+  document.removeEventListener('click', handleClickOutside)
+})
+
 </script>
 
 <template>
@@ -22,7 +51,7 @@ const openPrivacy = () => {
 
       <!-- MARCA -->
       <div class="brand">
-        vf_digital_services
+        VFA_Group_Services
       </div>
 
       <!-- MENU -->
@@ -33,7 +62,6 @@ const openPrivacy = () => {
 
         <a href="#" @click.prevent="openContact">Contacto</a>
 
-        <!-- 🔥 NUEVO BOTÓN -->
         <a href="#" class="privacy" @click.prevent="openPrivacy">
           Privacidad
         </a>
@@ -44,7 +72,7 @@ const openPrivacy = () => {
         Contáctanos
       </a>
 
-      <!-- HAMBURGUESA -->
+      <!-- HAMB -->
       <button class="hamb" @click="open = !open">
         ☰
       </button>
@@ -55,21 +83,7 @@ const openPrivacy = () => {
 
 <style scoped>
 
-/* 🔥 BOTÓN PRIVACIDAD MÁS SUTIL */
-.privacy {
-  font-size: 0.8rem;
-  color: #9ca3af;
-  text-decoration: none;
-  transition: 0.2s;
-}
-
-.privacy:hover {
-  color: #a855f7;
-}
-
-</style>
-
-<style scoped>
+/* NAV */
 .nav {
   position: fixed;
   top: 0;
@@ -78,7 +92,6 @@ const openPrivacy = () => {
 
   background: rgba(6,6,10,0.65);
   backdrop-filter: blur(12px);
-
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 
@@ -98,7 +111,6 @@ const openPrivacy = () => {
   letter-spacing: 1px;
 
   background: linear-gradient(90deg,#ec4899,#a855f7,#3b82f6);
-  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -107,7 +119,7 @@ const openPrivacy = () => {
 .menu {
   display: flex;
   justify-content: center;
-  gap: 28px;
+  gap: 26px;
 }
 
 .menu a {
@@ -115,8 +127,8 @@ const openPrivacy = () => {
   color: #cfcfd4;
   text-decoration: none;
   font-weight: 500;
-  transition: 0.25s;
   position: relative;
+  transition: 0.25s;
 }
 
 /* HOVER LINE */
@@ -127,7 +139,6 @@ const openPrivacy = () => {
   bottom: -6px;
   width: 0%;
   height: 2px;
-
   background: linear-gradient(90deg,#a855f7,#3b82f6);
   transition: 0.25s;
 }
@@ -140,17 +151,26 @@ const openPrivacy = () => {
   width: 100%;
 }
 
-/* BOTON */
+/* PRIVACIDAD (más discreto) */
+.privacy {
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+.privacy:hover {
+  color: #a855f7;
+}
+
+/* CTA */
 .cta {
   font-size: 0.9rem;
   padding: 10px 18px;
   border-radius: 10px;
-  text-decoration: none;
   color: white;
   font-weight: 600;
+  text-decoration: none;
 
   background: linear-gradient(90deg,#a855f7,#3b82f6);
-
   transition: 0.25s;
 }
 
@@ -168,21 +188,43 @@ const openPrivacy = () => {
   font-size: 1.4rem;
 }
 
-/* MOBILE */
+/* 🔥 MOBILE */
 @media (max-width: 900px) {
+
+  /* 🔥 NAVBAR BASE */
+  .nav {
+    height: 60px;
+  }
+
+  .wrap {
+    height: 60px;
+    display: flex;
+    align-items: center; /* 🔥 centra vertical */
+    justify-content: space-between;
+  }
+
+  .brand {
+    font-size: 0.95rem;
+  }
+
+  /* 🔥 MENÚ */
   .menu {
     position: absolute;
-    top: 70px;
-    right: 20px;
+    top: 65px;
+    right: 15px;
 
     flex-direction: column;
     width: 220px;
 
-    background: #0a0a0a;
-    border-radius: 12px;
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(10px);
 
+    border-radius: 12px;
     padding: 10px 0;
+
     display: none;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   }
 
   .menu.show {
@@ -190,15 +232,22 @@ const openPrivacy = () => {
   }
 
   .menu a {
-    padding: 12px 20px;
+    padding: 14px 20px;
+    text-align: left;
+    font-size: 0.95rem;
   }
 
+  /* 🔥 BOTÓN CTA OCULTO */
   .cta {
     display: none;
   }
 
+  /* 🔥 HAMBURGUESA */
   .hamb {
     display: block;
+    font-size: 1.3rem;
   }
+
 }
+
 </style>

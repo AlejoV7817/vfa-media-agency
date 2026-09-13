@@ -1,8 +1,9 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 const current = ref(0)
 const showAll = ref(false)
+const animate = ref(true)
 
 const reviews = [
   { text: "Excelente servicio. Mi página ahora genera clientes todos los días.", name: "Carlos Méndez", role: "Negocio local" },
@@ -16,11 +17,19 @@ const reviews = [
 ]
 
 function next() {
-  current.value = (current.value + 1) % reviews.length
+  animate.value = false
+  setTimeout(() => {
+    current.value = (current.value + 1) % reviews.length
+    animate.value = true
+  }, 150)
 }
 
 function prev() {
-  current.value = (current.value - 1 + reviews.length) % reviews.length
+  animate.value = false
+  setTimeout(() => {
+    current.value = (current.value - 1 + reviews.length) % reviews.length
+    animate.value = true
+  }, 150)
 }
 </script>
 
@@ -29,14 +38,14 @@ function prev() {
 
     <div class="container-global">
 
-      <h2>Lo que nuestros clientes dicen</h2>
+      <h2 class="fade">Lo que nuestros clientes dicen</h2>
 
       <!-- SLIDER -->
       <div class="slider" v-if="!showAll">
 
         <button class="nav-btn left" @click="prev">‹</button>
 
-        <div class="review">
+        <div :class="['review-box', animate ? 'fade' : '']">
           <p class="text">“{{ reviews[current].text }}”</p>
           <h3>{{ reviews[current].name }}</h3>
           <span>{{ reviews[current].role }}</span>
@@ -46,8 +55,8 @@ function prev() {
 
       </div>
 
-      <!-- 🔥 GRID DE 8 RESEÑAS -->
-      <div v-else class="all-reviews">
+      <!-- GRID -->
+      <div v-else class="all-reviews fade">
         <div class="review-card" v-for="(r, i) in reviews" :key="i">
           <p>“{{ r.text }}”</p>
           <h4>{{ r.name }}</h4>
@@ -55,13 +64,11 @@ function prev() {
         </div>
       </div>
 
-      <!-- BOTONES -->
-      <div class="actions">
+      <!-- BOTÓN -->
+      <div class="actions center">
         <button class="btn" @click="showAll = !showAll">
           {{ showAll ? 'Volver' : 'Ver todos los comentarios' }}
         </button>
-
-    
       </div>
 
     </div>
@@ -69,16 +76,17 @@ function prev() {
   </section>
 </template>
 
-<style scoped>
-/* 🔥 NUEVO BACKGROUND MÁS PRO */
+<style>
+
+/* 🔥 BACKGROUND */
 .testimonials {
   padding: 120px 20px;
-  color: white;
   text-align: center;
+  color: white;
 
   background:
-    radial-gradient(circle at 20% 30%, rgba(168,85,247,0.15), transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(59,130,246,0.15), transparent 50%),
+    radial-gradient(circle at 20% 30%, rgba(168,85,247,0.15), transparent),
+    radial-gradient(circle at 80% 70%, rgba(59,130,246,0.15), transparent),
     #07070b;
 }
 
@@ -88,51 +96,91 @@ h2 {
   margin-bottom: 60px;
 }
 
+/* 🔥 ANIMACIÓN SUAVE */
+.fade {
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* SLIDER */
 .slider {
   position: relative;
-  max-width: 800px;
+  max-width: 650px;
   margin: auto;
 }
 
-/* REVIEW */
+/* CAJA */
+.review-box {
+  padding: 45px 35px;
+  border-radius: 22px;
+
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+
+  backdrop-filter: blur(12px);
+
+  transition: 0.3s;
+}
+
+.review-box:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(168,85,247,0.2);
+}
+
+/* TEXTO */
 .text {
   font-size: 1.3rem;
-  color: #d1d5db;
-  margin-bottom: 25px;
+  color: #e5e7eb;
+  margin-bottom: 20px;
 }
 
 h3 {
   font-size: 1.2rem;
+  margin-bottom: 5px;
 }
 
 span {
   color: #9ca3af;
 }
 
-/* BOTONES SLIDER */
+/* FLECHAS */
 .nav-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255,255,255,0.05);
-  border: none;
-  color: white;
-  font-size: 1.5rem;
-  width: 45px;
-  height: 45px;
+
+  width: 44px;
+  height: 44px;
+
   border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.1);
+
+  background: rgba(255,255,255,0.05);
+  color: white;
+
   cursor: pointer;
+  transition: 0.3s;
 }
 
 .nav-btn:hover {
-  background: linear-gradient(90deg,#a855f7,#3b82f6);
+  background: linear-gradient(135deg,#a855f7,#3b82f6);
+  transform: translateY(-50%) scale(1.1);
 }
 
-.left { left: -60px; }
-.right { right: -60px; }
+.left { left: -55px; }
+.right { right: -55px; }
 
-/* 🔥 GRID DE RESEÑAS */
+/* GRID */
 .all-reviews {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -142,10 +190,12 @@ span {
 }
 
 .review-card {
+  padding: 20px;
+  border-radius: 14px;
+
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,255,255,0.08);
-  padding: 20px;
-  border-radius: 12px;
+
   transition: 0.3s;
 }
 
@@ -154,30 +204,45 @@ span {
   border-color: rgba(168,85,247,0.4);
 }
 
-/* BOTONES */
-.actions {
+/* BOTÓN */
+.actions.center {
   margin-top: 60px;
   display: flex;
   justify-content: center;
-  gap: 20px;
 }
 
 .btn {
   padding: 14px 28px;
   border-radius: 10px;
-  border: none;
+
   background: linear-gradient(90deg,#a855f7,#3b82f6);
   color: white;
+  border: none;
+
   cursor: pointer;
+  transition: 0.3s;
 }
 
-.outline {
-  background: transparent;
-  border: 1px solid #a855f7;
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(168,85,247,0.3);
 }
 
-/* RESPONSIVE */
+/* MOBILE */
 @media (max-width: 900px) {
+
+  h2 {
+    font-size: 1.9rem;
+  }
+
+  .review-box {
+    padding: 25px;
+  }
+
+  .text {
+    font-size: 1rem;
+  }
+
   .all-reviews {
     grid-template-columns: 1fr;
   }

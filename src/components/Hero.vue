@@ -1,57 +1,169 @@
 <script setup>
+
 import logo from '../assets/logo.png'
+
 </script>
 
+
 <template>
+
   <section class="hero">
+
     <div class="wrap container-global">
 
       <!-- TEXTO -->
+
       <div class="text fade-up">
 
         <h1>
-          Servicios de Diseño Web <br>
-          <span>& Marketing Digital</span>
+          Un grupo, <br>
+          <span>Diferentes oportunidades...</span>
         </h1>
 
+
         <p class="desc">
-          Creamos páginas web modernas, rápidas y optimizadas para convertir visitantes en clientes reales.
+          Creamos, desarrollamos y conectamos proyectos,
+          servicios y oportunidades en diferentes sectores.
         </p>
 
+
         <div class="actions">
-          <a href="https://wa.me/5215618049841" target="_blank" class="btn primary">
+
+          <!-- WHATSAPP -->
+
+          <a
+            href="https://wa.me/525587785216"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn primary"
+          >
             Contáctanos
           </a>
 
-          <a href="#servicios" class="btn ghost">
+
+          <!-- SERVICIOS -->
+
+          <a
+            href="#servicios"
+            class="btn ghost"
+          >
             Ver servicios
           </a>
+
+        </div>
+
+
+        <!-- STATS -->
+
+        <div class="stats">
+
+          <div>
+
+            <h4>100%</h4>
+
+            <p>Satisfacción</p>
+
+          </div>
+
+
+          <div>
+
+            <h4>Servicio 24h</h4>
+
+            <p>Disponibles</p>
+
+          </div>
+
+
+          <div>
+
+            <h4>Respuesta</h4>
+
+            <p>Casi inmediata</p>
+
+          </div>
+
         </div>
 
       </div>
 
+
       <!-- LOGO + REDES -->
+
       <div class="visual fade-in">
 
-        <img :src="logo" alt="logo">
+        <img
+          :src="logo"
+          alt="VFA Group"
+        >
 
-        <!-- 🔥 TITULO REDES -->
-        <p class="social-title">REDES</p>
 
-        <!-- REDES -->
+        <p class="social-title">
+          REDES
+        </p>
+
+
         <div class="socials">
 
-          <a href="https://www.instagram.com/vf_digital_services" target="_blank" class="ig">
+
+          <!-- FACEBOOK -->
+
+          <a
+            href="https://www.facebook.com/profile.php?id=61594065642099"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="fb"
+            aria-label="Facebook"
+          >
+
+            <i class="fab fa-facebook-f"></i>
+
+          </a>
+
+
+          <!-- INSTAGRAM -->
+
+          <a
+            href="https://www.instagram.com/vfa_group?stkn=ZWVlNnZ6N3VmNnRk&utm_source=qr"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+          >
+
             <i class="fab fa-instagram"></i>
+
           </a>
 
-          <a href="https://www.tiktok.com/@vfdigitalservicess" target="_blank" class="tt">
+
+          <!-- TIKTOK -->
+
+          <a
+            href="https://www.tiktok.com/@vfa_group"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="tt"
+            aria-label="TikTok"
+          >
+
             <i class="fab fa-tiktok"></i>
+
           </a>
 
-          <a href="https://wa.me/5215618049841" target="_blank" class="wa">
+
+          <!-- WHATSAPP -->
+
+          <a
+            href="https://wa.me/525587785216"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="wa"
+            aria-label="WhatsApp"
+          >
+
             <i class="fab fa-whatsapp"></i>
+
           </a>
+
 
         </div>
 
@@ -59,58 +171,90 @@ import logo from '../assets/logo.png'
 
     </div>
 
-    <!-- BOTÓN FLOTANTE -->
-    <a href="https://wa.me/5215618049841" class="whatsapp-float" target="_blank">
+
+    <!-- WHATSAPP FLOTANTE -->
+
+    <a
+      href="https://wa.me/525587785216"
+      class="whatsapp-float"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="WhatsApp"
+    >
+
       <i class="fab fa-whatsapp"></i>
+
     </a>
 
+
   </section>
+
 </template>
 
-<style scoped>
+<style>
 
-/* 🔥 TITULO REDES */
-.social-title {
-  margin-top: 10px;
-  font-size: 0.75rem;
-  letter-spacing: 2px;
-  color: #9ca3af;
-  text-transform: uppercase;
+/* RESET LINKS */
+a {
+  text-decoration: none !important;
 }
 
-/* ❌ QUITAR SUBRAYADO */
-.socials a,
-.socials a i {
-  text-decoration: none;
-}
-
+/* HERO */
 .hero {
   min-height: 100vh;
   display: flex;
   align-items: center;
   color: white;
-  background:
-    radial-gradient(circle at 25% 30%, rgba(168,85,247,0.18), transparent 50%),
-    radial-gradient(circle at 75% 70%, rgba(59,130,246,0.18), transparent 50%),
-    #050507;
+  background: #050507;
+  position: relative;
+  overflow: hidden;
 }
 
+/* FONDO ANIMADO */
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  top: -10%;
+  left: -10%;
+
+  background:
+    radial-gradient(circle at 30% 30%, rgba(168,85,247,0.35), transparent 40%),
+    radial-gradient(circle at 70% 70%, rgba(59,130,246,0.35), transparent 40%);
+
+  filter: blur(80px);
+  animation: moveGlow 10s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: moveParticles 20s linear infinite;
+  z-index: 0;
+}
+
+/* CONTENIDO */
 .wrap {
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 140px;
+   gap: clamp(40px, 6vw, 80px);
 }
 
+/* TEXTO */
 .text {
   max-width: 560px;
 }
 
 h1 {
-  font-size: 3.8rem;
-  line-height: 1.1;
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
   font-weight: 700;
-  letter-spacing: 1px;
 }
 
 h1 span {
@@ -122,19 +266,18 @@ h1 span {
 .desc {
   margin-top: 20px;
   color: #9ca3af;
-  font-size: 1.1rem;
 }
 
+/* BOTONES */
 .actions {
   margin-top: 30px;
+  display: flex;
+  gap: 20px;
 }
 
 .btn {
   padding: 14px 24px;
   border-radius: 10px;
-  margin-right: 12px;
-  font-weight: 600;
-  text-decoration: none;
 }
 
 .primary {
@@ -147,69 +290,115 @@ h1 span {
   color: #a855f7;
 }
 
-/* LOGO */
+/* STATS */
+.stats {
+  display: flex;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.stats h4 {
+  font-size: 1.3rem;
+  background: linear-gradient(90deg,#a855f7,#3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.stats p {
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+/* VISUAL */
 .visual {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
 }
 
 .visual img {
-  width: 620px;
-  mix-blend-mode: screen;
-  opacity: 0.95;
+  width: clamp(200px, 30vw, 420px);
 }
 
 /* REDES */
-.socials {
-  display: flex;
-  gap: 16px;
+.social-title {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin-top: 10px;
 }
 
+.socials {
+  display: flex;
+  gap: 18px;
+  margin-top: 10px;
+}
+
+/* BOTONES BASE */
 .socials a {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  font-size: 20px;
-  color: white;
+  font-size: 22px;
 
   background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.08);
 
+  color: #cfcfd4;
+
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 🔥 EFECTO GLOW SUAVE */
+.socials a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
   transition: 0.3s;
 }
 
-/* HOVER PRO */
+/* INSTAGRAM */
 .socials a.ig:hover {
-  background: #E1306C;
-  box-shadow: 0 0 20px #E1306C;
+  color: white;
+  background: linear-gradient(135deg,#E1306C,#833AB4,#405DE6);
+  box-shadow: 0 0 25px rgba(225,48,108,0.6);
 }
 
+/* TIKTOK */
 .socials a.tt:hover {
+  color: white;
   background: #000;
-  box-shadow: 0 0 20px #25F4EE;
+  box-shadow: 0 0 25px #25F4EE;
 }
 
+/* WHATSAPP */
 .socials a.wa {
   background: #25D366;
+  color: white;
 }
 
 .socials a.wa:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 20px #25D366;
+  transform: scale(1.08);
+  box-shadow: 0 0 25px #25D366;
 }
 
-/* FLOAT WHATSAPP */
+/* HOVER GENERAL */
+.socials a:hover {
+  transform: translateY(-6px) scale(1.05);
+}
+
+/* FLOAT */
 .whatsapp-float {
   position: fixed;
-  bottom: 25px;
-  right: 25px;
+  bottom: 20px;
+  right: 20px;
 
   width: 65px;
   height: 65px;
@@ -226,45 +415,157 @@ h1 span {
 
   box-shadow: 0 10px 30px rgba(37,211,102,0.4);
 
-  z-index: 999;
+  z-index: 9999; /* 🔥 CLAVE */
+
+  transition: all 0.3s ease;
 }
 
 .whatsapp-float:hover {
   transform: scale(1.1);
+  box-shadow: 0 0 30px #25D366;
+
 }
 
 /* ANIMACIONES */
+@keyframes moveGlow {
+  0% { transform: translate(0,0); }
+  100% { transform: translate(60px,-60px); }
+}
+
+@keyframes moveParticles {
+  from { transform: translateY(0); }
+  to { transform: translateY(40px); }
+}
+/* 🔥 ANIMACIONES (CORRECTAS) */
+
 .fade-up {
+  opacity: 0;
+  transform: translateY(30px);
   animation: fadeUp 0.9s ease forwards;
 }
 
 .fade-in {
-  animation: fadeIn 1.2s ease forwards;
+  opacity: 0;
+  transform: scale(0.95);
+  animation: fadeIn 1.1s ease forwards;
 }
 
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
-/* RESPONSIVE */
-@media (max-width: 900px) {
-  .wrap {
-    flex-direction: column;
-    text-align: center;
+/* LOGO FLOTANTE */
+.visual img {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+/* 🔥 RESPONSIVE BIEN HECHO */
+/* 🔥 RESPONSIVE LIMPIO */
+@media (max-width: 768px) {
+
+  .hero {
+    padding: 130px 20px 80px; /* 🔥 más aire arriba y abajo */
   }
 
-  h1 {
-    font-size: 2.6rem;
+  .wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 50px; /* 🔥 más separación general */
+  }
+
+  /* 🔥 LOGO ARRIBA */
+  .visual {
+    order: -1;
+    margin-bottom: 10px;
   }
 
   .visual img {
-    width: 380px;
+    width: 180px;
+    margin-bottom: 20px; /* 🔥 separa del contenido */
   }
+
+  /* 🔥 REDES */
+  .social-title {
+    margin-bottom: 10px;
+  }
+
+  .socials {
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 20px; /* 🔥 separa del texto */
+  }
+
+  .socials a {
+    width: 42px;
+    height: 42px;
+  }
+
+  /* 🔥 TEXTO */
+  .text {
+    order: 1;
+    max-width: 320px;
+    margin-top: 10px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+    line-height: 1.2;
+    margin-bottom: 15px;
+  }
+
+  .desc {
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+  }
+
+  /* 🔥 BOTONES */
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    margin-top: 10px;
+  }
+
+  .btn {
+    width: 100%;
+    max-width: 240px;
+    padding: 12px;
+    font-size: 0.85rem;
+  }
+
+  /* 🔥 WHATSAPP */
+  .whatsapp-float {
+    width: 55px;
+    height: 55px;
+    bottom: 18px;
+    right: 18px;
+  }
+/* FACEBOOK */
+.socials a.fb:hover {
+  background: #1877F2;
+  box-shadow: 0 0 20px #1877F2;
 }
+}
+
+/* ENTRADA TEXTO */
+
+
 </style>
